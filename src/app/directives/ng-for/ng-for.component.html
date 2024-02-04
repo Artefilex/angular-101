@@ -1,0 +1,11 @@
+<!-- @for (item of names; track item) {
+  <div>{{ item }}</div>
+} -->
+
+<div *ngFor="let name of names">{{name}}</div>
+
+<div *ngFor="let user of userList">{{user.id}} . {{user.name}}</div>
+
+<div appCustom>  Angular Custom</div>
+
+<ul  [appMyCustomMap]="numbers" [mapFunction]="multiplier"></ul>

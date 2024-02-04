@@ -1,27 +1,44 @@
-# Angular102
+# Angular CLI comment 101
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+1. yeni bir proje oluşturmak için `ng new project name`
+2. projeyi acmak için `ng serve`
+3. yeni bir component için `ng generate component pages/componentname`
 
-## Development server
+## LifeCycle Hooks
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+**ngOnChange:** Herhangi bir değişim olduğunda tetiklenir input output için
 
-## Code scaffolding
+**ngOnInit:** 3. party bir kütüphaneden data çekerken kullanılır
+**ngDoCheck:**
+**ngAfterContentInit:**
+**ngAfterContentChecked:**
+**ngAfterViewInit:**
+**ngAfterViewChecked:**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**ngOnDestroy:** bir component ekrandan gittiğinde çağrılır memory-leak için kullanılır
 
-## Build
+## onChange Hooks
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+İnputta meydana gelen değişimi yakalamak için kullanıyoruz
 
-## Running unit tests
+```Javascript
+export class TwoWayBindingComponent implements OnChanges{
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+@Input() fullname: string | undefined
+ ngOnChanges(changes: SimpleChanges): void {
+   console.log(changes)
+ }
+}
 
-## Running end-to-end tests
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+kullanıldığı comporente implement ettikten sonra ngOnChanges diyerek istedigimiz işlemi gercekleştiriyoruz
 
-## Further help
+```Javascript
+<input type="text" [(ngModel)]="fullname" placeholder="foo" />
+<app-two-way-binding [fullname]="fullname" />
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+
+kullanırken dinamik veri okuması yapacagımız için ilgli degisken için köşeli parantezle sarmalıyoruz
+ngModeli kullanabilmek için kullanıldıgı yerde FormModule imports arrayine yazıyoruz
